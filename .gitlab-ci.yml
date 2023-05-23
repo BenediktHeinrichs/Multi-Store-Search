@@ -7,7 +7,7 @@ default:
 
 stages:
   - build
-  - public
+  - pages
 
 build-branch:
   # make sure to use a docker runner for all jobs
@@ -32,7 +32,7 @@ build-branch:
       - dist
     expire_in: 1 week
 
-public:
+pages:
   # make sure to use a docker runner for all jobs
   tags:
     - env:docker
@@ -41,7 +41,7 @@ public:
   variables:
     # temporary fix: https://github.com/renovatebot/renovate/discussions/9481#discussioncomment-660412
     YARN_ENABLE_IMMUTABLE_INSTALLS: "false"
-  stage: public
+  stage: pages
   before_script:
     # make sure to use yarn2
     - yarn set version berry
