@@ -18,7 +18,6 @@ build-branch:
   variables:
     # temporary fix: https://github.com/renovatebot/renovate/discussions/9481#discussioncomment-660412
     YARN_ENABLE_IMMUTABLE_INSTALLS: "false"
-    BUILD_PATH: "./dist"
   stage: build
   before_script:
     # make sure to use yarn2
@@ -42,7 +41,6 @@ public:
   variables:
     # temporary fix: https://github.com/renovatebot/renovate/discussions/9481#discussioncomment-660412
     YARN_ENABLE_IMMUTABLE_INSTALLS: "false"
-    BUILD_PATH: "./public"
   stage: public
   before_script:
     # make sure to use yarn2
@@ -50,9 +48,9 @@ public:
     # always install dependencies, will come from cache and is usually fast
     - yarn install
   script:
-    - yarn run build
+    - yarn run build && mv dist public
   artifacts:
-    # all build results are expected to be in the `dist` folder
+    # all build results are expected to be in the `public` folder
     paths:
       - public
     expire_in: 1 year
