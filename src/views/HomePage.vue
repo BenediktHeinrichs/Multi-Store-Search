@@ -47,9 +47,7 @@
         </button>
       </div>
     </div>
-    <pre v-if="output !== ''">
-      {{ output }}
-    </pre>
+    <pre v-if="output !== ''" class="resultOutput">{{ output }}</pre>
   </div>
 </template>
 
@@ -70,11 +68,11 @@ const canSearch = computed(() => {
   return terms.value.length > 0;
 });
 
-const firstOption = { text: "Schema", value: "Schema" };
+const firstOption = { text: "Metadata", value: "Metadata" };
 
 const schemaOrMetadataOptions = ref([
   firstOption,
-  { text: "Metadata", value: "Metadata" },
+  { text: "Schema", value: "Schema" },
 ]);
 
 const schemaOrMetadata = ref(firstOption.value);
@@ -88,28 +86,41 @@ const search = async () => {
   const mappings = await receiveMappings();
   output.value = "";
 
-  try {
-    for (const mapping of mappings) {
+  for (const mapping of mappings) {
+    try {
       const clientId = `${mapping.toLowerCase()}_${schemaOrMetadata.value}_ID`;
       if (schemaOrMetadata.value === "Schema") {
-        output.value += await searchSchema({
-          clientId,
-          id: terms.value,
-          token: "",
-        });
+        output.value += JSON.stringify(
+          await searchSchema({
+            clientId,
+            id: terms.value,
+            token: "",
+          }),
+          null,
+          2
+        );
       } else {
-        output.value += await searchMetadata({
-          clientId,
-          id: terms.value,
-          token: "",
-        });
+        output.value += JSON.stringify(
+          await searchMetadata({
+            clientId,
+            id: terms.value,
+            token: "",
+          }),
+          null,
+          2
+        );
       }
+    } catch {
+      output.value += `An error occurred while running this request for ${mapping}!\n\n`;
     }
-  } catch {
-    output.value = "An error occurred while running this request!";
-  } finally {
-    emitter.emit("asyncComponentLoaded");
-    loading.value = false;
   }
+  emitter.emit("asyncComponentLoaded");
+  loading.value = false;
 };
 </script>
+
+<style scoped>
+.resultOutput {
+  text-align: left;
+}
+</style>

@@ -16,6 +16,14 @@
 
         <!-- Right aligned nav items -->
         <b-navbar-nav class="ms-auto">
+          <b-navbar-brand href="https://nfdi4ing.de/">
+            <img
+              class="nfdi4ingLogo"
+              src="@/assets/logo_nfdi4ing_white_quer.svg"
+              alt="NFDI4Ing Logo"
+              data-themekey="#"
+            />
+          </b-navbar-brand>
           <b-nav-item href="https://nfdi4ing.de/base-services/s-3/"
             ><i-bi-info-circle
           /></b-nav-item>
@@ -142,6 +150,12 @@ export default defineComponent({
 }
 .toggle-theme {
   margin-bottom: 0.25rem;
+}
+.navbar a img.nfdi4ingLogo {
+  border: 0px;
+  object-position: 0%;
+  width: 74px;
+  height: 30px;
 }
 </style>
 
