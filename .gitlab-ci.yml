@@ -1,0 +1,61 @@
+# ensure that a docker runner is used
+default:
+  # this is actually quite bad since in ci arrays are always overwritten.
+  # it is likely better to add that line by hand!
+  tags:
+    - env:docker
+
+stages:
+  - build
+  - public
+
+build-branch:
+  # make sure to use a docker runner for all jobs
+  tags:
+    - env:docker
+  # use node latest for all jobs
+  image: node:18.4.0
+  variables:
+    # temporary fix: https://github.com/renovatebot/renovate/discussions/9481#discussioncomment-660412
+    YARN_ENABLE_IMMUTABLE_INSTALLS: "false"
+    BUILD_PATH: "./dist"
+  stage: build
+  before_script:
+    # make sure to use yarn2
+    - yarn set version berry
+    # always install dependencies, will come from cache and is usually fast
+    - yarn install
+  script:
+    - yarn run build
+  artifacts:
+    # all build results are expected to be in the `dist` folder
+    paths:
+      - dist
+    expire_in: 1 week
+
+public:
+  # make sure to use a docker runner for all jobs
+  tags:
+    - env:docker
+  # use node latest for all jobs
+  image: node:18.4.0
+  variables:
+    # temporary fix: https://github.com/renovatebot/renovate/discussions/9481#discussioncomment-660412
+    YARN_ENABLE_IMMUTABLE_INSTALLS: "false"
+    BUILD_PATH: "./public"
+  stage: public
+  before_script:
+    # make sure to use yarn2
+    - yarn set version berry
+    # always install dependencies, will come from cache and is usually fast
+    - yarn install
+  script:
+    - yarn run build
+  artifacts:
+    # all build results are expected to be in the `dist` folder
+    paths:
+      - public
+    expire_in: 1 year
+  only:  
+    refs:
+      - main
