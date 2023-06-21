@@ -61,7 +61,39 @@
         </button>
       </div>
     </div>
-    <pre v-if="output !== ''" class="resultOutput">{{ output }}</pre>
+    <div v-if="displayOutput.length" class="mb-3">
+      <b-accordion
+        v-for="mappingOutput in displayOutput"
+        :key="mappingOutput.mapping"
+      >
+        <b-accordion-item :title="mappingOutput.mapping" visible>
+          <div v-if="mappingOutput.results.length">
+            <b-accordion
+              v-for="(resultOutput, index) in mappingOutput.results"
+              :key="index"
+            >
+              <b-accordion-item :title="resultOutput.title">
+                <b-list-group>
+                  <b-list-group-item
+                    v-for="(value, key) in resultOutput.values"
+                    :key="key"
+                    class="d-flex justify-content-between align-items-start text-start"
+                  >
+                    <div class="ms-2 me-auto">
+                      <div class="fw-bold">{{ key }}</div>
+                      {{ value }}
+                    </div>
+                  </b-list-group-item>
+                </b-list-group>
+              </b-accordion-item>
+            </b-accordion>
+          </div>
+          <p v-else class="align-middle mb-0">
+            No results for {{ mappingOutput.mapping }}.
+          </p>
+        </b-accordion-item>
+      </b-accordion>
+    </div>
   </div>
 </template>
 
@@ -72,7 +104,8 @@ import {
   searchMetadata,
   searchSchema,
 } from "@/requests/rest-client";
-import type { MetadataHubResponse } from "@/types/metadataHubResponse";
+import type { FormattedResults } from "@/types/formattedResults";
+import { formatBasedOnMapping, formatResults } from "@/util/formatters";
 import type { RemovableRef } from "@vueuse/core";
 
 const mappings: Ref<string[]> = ref([]);
@@ -106,19 +139,19 @@ const firstOption = { text: "Metadata", value: "Metadata" };
 const schemaOrMetadata = ref(firstOption.value);
 
 const output = ref("");
-
-const formatResults = (response: string | MetadataHubResponse) => {
-  if (typeof response === "string") {
-    response = JSON.parse(response) as MetadataHubResponse;
-  }
-  return response.elements.map((element) => JSON.parse(element.value));
-};
+const displayOutput: Ref<
+  {
+    mapping: string;
+    results: FormattedResults[];
+  }[]
+> = ref([]);
 
 const search = async () => {
   loading.value = true;
   emitter.emit("asyncComponentLoading");
 
   output.value = "";
+  displayOutput.value = [];
 
   for (const mapping of mappings.value) {
     try {
@@ -138,6 +171,10 @@ const search = async () => {
           token: token,
         })
       );
+      displayOutput.value.push({
+        mapping: mapping,
+        results: formatBasedOnMapping(result, mapping),
+      });
       output.value +=
         `Results from ${mapping}:\n` + JSON.stringify(result, null, 2) + "\n\n";
     } catch {
