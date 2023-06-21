@@ -67,7 +67,7 @@
         :key="mappingOutput.mapping"
       >
         <b-accordion-item :title="mappingOutput.mapping" visible>
-          <div v-if="mappingOutput.results.length">
+          <div v-if="mappingOutput.results && mappingOutput.results.length">
             <b-accordion
               v-for="(resultOutput, index) in mappingOutput.results"
               :key="index"
@@ -88,8 +88,11 @@
               </b-accordion-item>
             </b-accordion>
           </div>
-          <p v-else class="align-middle mb-0">
+          <p v-else-if="mappingOutput.results" class="align-middle mb-0">
             No results for {{ mappingOutput.mapping }}.
+          </p>
+          <p v-else class="align-middle mb-0">
+            Error for {{ mappingOutput.mapping }}.
           </p>
         </b-accordion-item>
       </b-accordion>
@@ -142,7 +145,7 @@ const output = ref("");
 const displayOutput: Ref<
   {
     mapping: string;
-    results: FormattedResults[];
+    results?: FormattedResults[];
   }[]
 > = ref([]);
 
@@ -178,6 +181,10 @@ const search = async () => {
       output.value +=
         `Results from ${mapping}:\n` + JSON.stringify(result, null, 2) + "\n\n";
     } catch {
+      displayOutput.value.push({
+        mapping: mapping,
+        results: undefined,
+      });
       output.value += `An error occurred while running this request for ${mapping}!\n\n`;
     }
   }
