@@ -48,11 +48,11 @@ describe("formatCoscine", () => {
     ] as unknown as CoscineSearchResult[][];
     const expected = [
       {
-        title: "Title 1 (Graph 1)",
+        title: "Title 1",
         values: { title: "Title 1" },
       },
       {
-        title: "Title 2 (Graph 2)",
+        title: "Title 2",
         values: { title: "Title 2" },
       },
     ];
@@ -115,12 +115,14 @@ describe("formatMetastore", () => {
 describe("formatElse", () => {
   test("should return formatted results for unknown mapping", () => {
     const results = [
-      { title: "Title 1", data: "Data 1" },
-      { title: "Title 2", data: "Data 2" },
+      [
+        { title: "Title 1", data: "Data 1" },
+        { title: "Title 2", data: "Data 2" },
+      ],
     ];
     const expected = [
-      { title: "Result 0", values: { title: "Title 1", data: "Data 1" } },
-      { title: "Result 1", values: { title: "Title 2", data: "Data 2" } },
+      { title: "Result 1", values: { title: "Title 1", data: "Data 1" } },
+      { title: "Result 2", values: { title: "Title 2", data: "Data 2" } },
     ];
     expect(formatElse(results)).toEqual(expected);
   });
@@ -143,11 +145,11 @@ describe("formatBasedOnMapping", () => {
     const mapping = "Coscine";
     const expected = [
       {
-        title: "Title 1 (Graph 1)",
+        title: "Title 1",
         values: { title: "Title 1" },
       },
       {
-        title: "Title 2 (Graph 2)",
+        title: "Title 2",
         values: { title: "Title 2" },
       },
     ];
@@ -195,13 +197,15 @@ describe("formatBasedOnMapping", () => {
 
   test("should return formatted results for unknown mapping", async () => {
     const results = [
-      { title: "Title 1", data: "Data 1" },
-      { title: "Title 2", data: "Data 2" },
+      [
+        { title: "Title 1", data: "Data 1" },
+        { title: "Title 2", data: "Data 2" },
+      ],
     ];
     const mapping = "Unknown";
     const expected = [
-      { title: "Result 0", values: { title: "Title 1", data: "Data 1" } },
-      { title: "Result 1", values: { title: "Title 2", data: "Data 2" } },
+      { title: "Result 1", values: { title: "Title 1", data: "Data 1" } },
+      { title: "Result 2", values: { title: "Title 2", data: "Data 2" } },
     ];
     expect(await formatBasedOnMapping(results, mapping)).toEqual(expected);
   });
