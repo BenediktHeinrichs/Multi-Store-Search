@@ -71,7 +71,7 @@ export default defineComponent({
   mounted() {
     // From: https://getbootstrap.com/docs/5.3/customize/color-modes/#javascript
     const storedTheme: Theme | null = localStorage.getItem(
-      "theme"
+      "theme",
     ) as Theme | null;
 
     this.setTheme(this.getPreferredTheme(storedTheme));
@@ -118,7 +118,7 @@ export default defineComponent({
     showActiveTheme(theme: Theme) {
       const activeThemeIcon = document.querySelector(".theme-icon-active use");
       const btnToActive = document.querySelector(
-        `[data-bs-theme-value="${theme}"]`
+        `[data-bs-theme-value="${theme}"]`,
       );
       if (btnToActive !== null && activeThemeIcon !== null) {
         const svgQuery = btnToActive.querySelector("svg use");
@@ -156,6 +156,9 @@ export default defineComponent({
   object-position: 0%;
   width: 74px;
   height: 30px;
+}
+.bg-dark :deep(.navbar-toggler-icon) {
+  mix-blend-mode: color-dodge !important;
 }
 </style>
 

@@ -133,7 +133,7 @@ describe("formatElse", () => {
 });
 
 describe("formatBasedOnMapping", () => {
-  test("should return formatted results based on mapping", () => {
+  test("should return formatted results based on mapping", async () => {
     const results = [
       [
         { source: { title: "Title 1" }, graphName: "Graph 1" },
@@ -151,10 +151,10 @@ describe("formatBasedOnMapping", () => {
         values: { title: "Title 2" },
       },
     ];
-    expect(formatBasedOnMapping(results, mapping)).toEqual(expected);
+    expect(await formatBasedOnMapping(results, mapping)).toEqual(expected);
   });
 
-  test("should return formatted results for Metastore mapping", () => {
+  test("should return formatted results for Metastore mapping", async () => {
     const results = [
       {
         hits: {
@@ -190,10 +190,10 @@ describe("formatBasedOnMapping", () => {
         },
       },
     ];
-    expect(formatBasedOnMapping(results, mapping)).toEqual(expected);
+    expect(await formatBasedOnMapping(results, mapping)).toEqual(expected);
   });
 
-  test("should return formatted results for unknown mapping", () => {
+  test("should return formatted results for unknown mapping", async () => {
     const results = [
       { title: "Title 1", data: "Data 1" },
       { title: "Title 2", data: "Data 2" },
@@ -203,6 +203,6 @@ describe("formatBasedOnMapping", () => {
       { title: "Result 0", values: { title: "Title 1", data: "Data 1" } },
       { title: "Result 1", values: { title: "Title 2", data: "Data 2" } },
     ];
-    expect(formatBasedOnMapping(results, mapping)).toEqual(expected);
+    expect(await formatBasedOnMapping(results, mapping)).toEqual(expected);
   });
 });

@@ -62,17 +62,20 @@
       </div>
     </div>
     <div v-if="displayOutput.length" class="mb-3">
-      <b-accordion
-        v-for="mappingOutput in displayOutput"
-        :key="mappingOutput.mapping"
-      >
-        <b-accordion-item :title="mappingOutput.mapping" visible>
+      <b-accordion>
+        <b-accordion-item
+          v-for="mappingOutput in displayOutput"
+          :key="mappingOutput.mapping"
+          :title="mappingOutput.mapping"
+          visible
+        >
           <div v-if="mappingOutput.results && mappingOutput.results.length">
-            <b-accordion
-              v-for="(resultOutput, index) in mappingOutput.results"
-              :key="index"
-            >
-              <b-accordion-item :title="resultOutput.title">
+            <b-accordion>
+              <b-accordion-item
+                v-for="(resultOutput, index) in mappingOutput.results"
+                :key="index"
+                :title="resultOutput.title"
+              >
                 <b-list-group>
                   <b-list-group-item
                     v-for="(value, key) in resultOutput.values"
@@ -172,11 +175,11 @@ const search = async () => {
           clientId,
           id: terms.value,
           token: token,
-        })
+        }),
       );
       displayOutput.value.push({
         mapping: mapping,
-        results: formatBasedOnMapping(result, mapping),
+        results: await formatBasedOnMapping(result, mapping),
       });
       output.value +=
         `Results from ${mapping}:\n` + JSON.stringify(result, null, 2) + "\n\n";

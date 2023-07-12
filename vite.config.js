@@ -6,6 +6,8 @@ import Icons from "unplugin-icons/vite";
 import IconsResolver from "unplugin-icons/resolver";
 import AutoImport from "unplugin-auto-import/vite";
 
+import { nodePolyfills } from 'vite-plugin-node-polyfills';
+
 import { BootstrapVueNextResolver } from "unplugin-vue-components/resolvers";
 
 const config = defineConfig({
@@ -16,17 +18,19 @@ const config = defineConfig({
   },
 
   build: {
-    minify: true,
     rollupOptions: {
       output: {
         manualChunks: {
           "bootstrap-vue-next": ["bootstrap-vue-next"],
+          "rdf-ext": ["rdf-ext"],
+          "rdf-parse": ["rdf-parse"],
         },
       },
     },
   },
 
   plugins: [
+    nodePolyfills(),
     vue(),
     Components({
       resolvers: [

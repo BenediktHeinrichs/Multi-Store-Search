@@ -4,6 +4,7 @@ import type {
   CoscineSearchResult,
   MetastoreSearchResult,
 } from "@/types/searchResults";
+import { parseRDFDefinition } from "./basicLinkedData";
 
 export const formatResults = (response: string | MetadataHubResponse) => {
   if (typeof response === "string") {
@@ -12,14 +13,35 @@ export const formatResults = (response: string | MetadataHubResponse) => {
   return response.elements.map((element) => JSON.parse(element.value));
 };
 
+export const formatAims = async (
+  results: string[][],
+): Promise<FormattedResults[]> => {
+  const returnArray: FormattedResults[] = [];
+  if (results[0]) {
+    const resultArr = results[0];
+    for (const resultIndex in resultArr) {
+      const dataset = await parseRDFDefinition(resultArr[resultIndex]);
+      const record: Record<string, string> = {};
+      dataset.forEach((quad) => {
+        record[quad.predicate.value] = quad.object.value;
+      });
+      returnArray.push({
+        title: "Result " + (Number(resultIndex) + 1),
+        values: record,
+      });
+    }
+  }
+  return returnArray;
+};
+
 export const formatCoscine = (
-  results: CoscineSearchResult[][]
+  results: CoscineSearchResult[][],
 ): FormattedResults[] => {
   const returnArray: FormattedResults[] = [];
   if (results[0]) {
     for (const result of results[0]) {
       returnArray.push({
-        title: `${result.source.title} (${result.graphName})`,
+        title: result.source.title,
         values: result.source,
       });
     }
@@ -28,7 +50,7 @@ export const formatCoscine = (
 };
 
 export const formatMetastore = (
-  results: MetastoreSearchResult[]
+  results: MetastoreSearchResult[],
 ): FormattedResults[] => {
   const returnArray: FormattedResults[] = [];
   const hits = results[0]?.hits?.hits ?? [];
@@ -44,20 +66,25 @@ export const formatMetastore = (
 
 export const formatElse = (results: unknown[]): FormattedResults[] => {
   const returnArray: FormattedResults[] = [];
-  for (const resultIndex in results) {
-    returnArray.push({
-      title: "Result " + resultIndex,
-      values: results[resultIndex] as Record<string, unknown>,
-    });
+  if (results[0] && Array.isArray(results[0])) {
+    const resultArr = results[0];
+    for (const resultIndex in resultArr) {
+      returnArray.push({
+        title: "Result " + (Number(resultIndex) + 1),
+        values: resultArr[resultIndex] as Record<string, unknown>,
+      });
+    }
   }
   return returnArray;
 };
 
-export const formatBasedOnMapping = (
+export const formatBasedOnMapping = async (
   results: unknown[],
-  mapping: string
-): FormattedResults[] => {
+  mapping: string,
+): Promise<FormattedResults[]> => {
   switch (mapping) {
+    case "Aims":
+      return await formatAims(results as string[][]);
     case "Coscine":
       return formatCoscine(results as CoscineSearchResult[][]);
     case "Metastore":
