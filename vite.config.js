@@ -18,6 +18,9 @@ const config = defineConfig({
   },
 
   build: {
+    commonjsOptions: {
+      strictRequires: true
+    },
     rollupOptions: {
       output: {
         manualChunks: {

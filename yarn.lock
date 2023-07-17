@@ -818,13 +818,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@iconify/json@npm:^2.2.89":
-  version: 2.2.89
-  resolution: "@iconify/json@npm:2.2.89"
+"@iconify/json@npm:^2.2.91":
+  version: 2.2.91
+  resolution: "@iconify/json@npm:2.2.91"
   dependencies:
     "@iconify/types": "*"
     pathe: ^1.1.0
-  checksum: 6d7469989a039e23b1ce8dab29a0a50992676c505f1edc08750c4b31184ea31aa51892204b04b4a334676615f58770efd9e074e3354abd9108658d9005444147
+  checksum: 0e2f1ab39c4b81125883694a25bf5adf88f7cabd914975bde52e460dbcd7632010173930b3e246612b1d7a3ceb48c6677a60d4fcc3e2a5b8d01e0bb58c28a86d
   languageName: node
   linkType: hard
 
@@ -835,7 +835,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@iconify/utils@npm:^2.1.6":
+"@iconify/utils@npm:^2.1.7":
   version: 2.1.7
   resolution: "@iconify/utils@npm:2.1.7"
   dependencies:
@@ -2149,18 +2149,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@vueuse/core@npm:^10.2.0":
-  version: 10.2.0
-  resolution: "@vueuse/core@npm:10.2.0"
-  dependencies:
-    "@types/web-bluetooth": ^0.0.17
-    "@vueuse/metadata": 10.2.0
-    "@vueuse/shared": 10.2.0
-    vue-demi: ">=0.14.5"
-  checksum: 022b07ca097ca32eb8995ff17a8855d1ac641194aa89956a2f3bf62b7861caa72df39750e885e9b67e4a55ee9cb98ca54554450ee62b56445c6d587dc065c88f
-  languageName: node
-  linkType: hard
-
 "@vueuse/core@npm:^10.2.1":
   version: 10.2.1
   resolution: "@vueuse/core@npm:10.2.1"
@@ -2173,26 +2161,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@vueuse/metadata@npm:10.2.0":
-  version: 10.2.0
-  resolution: "@vueuse/metadata@npm:10.2.0"
-  checksum: 01d98a3f6918442a919c6c875a0e467429e84db997eb4c74b8da5c524072969684e5443b938cace6a51f632ed328834ac1685fa4d8fc67d506f5373ef4829275
-  languageName: node
-  linkType: hard
-
 "@vueuse/metadata@npm:10.2.1":
   version: 10.2.1
   resolution: "@vueuse/metadata@npm:10.2.1"
   checksum: 1672c0e6e6a54fe397c04b83bf4b78a8db410df272010f5db829e9f72ed285d526ca8bb4d7a3373b17aac2fb37c83d866f6077e667f54afc1ae20bf1ab1a5478
-  languageName: node
-  linkType: hard
-
-"@vueuse/shared@npm:10.2.0":
-  version: 10.2.0
-  resolution: "@vueuse/shared@npm:10.2.0"
-  dependencies:
-    vue-demi: ">=0.14.5"
-  checksum: b96884b82f315622639cbb186f6989d08527e2aa43236e91d6d454afb9a599b23e32af326351c8c9db9c7d7cc4a0797d44e4644d31de9615bba4f8371838e0e1
   languageName: node
   linkType: hard
 
@@ -2535,15 +2507,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"bootstrap-vue-next@npm:^0.9.23":
-  version: 0.9.23
-  resolution: "bootstrap-vue-next@npm:0.9.23"
+"bootstrap-vue-next@npm:^0.9.26":
+  version: 0.9.26
+  resolution: "bootstrap-vue-next@npm:0.9.26"
   dependencies:
     "@floating-ui/vue": ^1.0.1
-    "@vueuse/core": ^10.2.0
+    "@vueuse/core": ^10.2.1
   peerDependencies:
     vue: ^3.3.4
-  checksum: 2e10058ac4414bc53d1f0d45f5f9f92e4064112c6f90ed78aac352a0df442c334ddf6961003999695c0816a5110ecfaf40bdc4a046aa8c42f25066b64b265db3
+  checksum: 6063ad8b06b99c2a0ec02ae09ca367ddc647ef9e7f6268a5182c3dfaae748e2dfc96629005dc5f377d167f09b2674410df18a29305347db176b80562755cb906
   languageName: node
   linkType: hard
 
@@ -3937,9 +3909,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint@npm:^8.44.0":
-  version: 8.44.0
-  resolution: "eslint@npm:8.44.0"
+"eslint@npm:^8.45.0":
+  version: 8.45.0
+  resolution: "eslint@npm:8.45.0"
   dependencies:
     "@eslint-community/eslint-utils": ^4.2.0
     "@eslint-community/regexpp": ^4.4.0
@@ -3966,7 +3938,6 @@ __metadata:
     globals: ^13.19.0
     graphemer: ^1.4.0
     ignore: ^5.2.0
-    import-fresh: ^3.0.0
     imurmurhash: ^0.1.4
     is-glob: ^4.0.0
     is-path-inside: ^3.0.3
@@ -3978,11 +3949,10 @@ __metadata:
     natural-compare: ^1.4.0
     optionator: ^0.9.3
     strip-ansi: ^6.0.1
-    strip-json-comments: ^3.1.0
     text-table: ^0.2.0
   bin:
     eslint: bin/eslint.js
-  checksum: d06309ce4aafb9d27d558c8e5e5aa5cba3bbec3ce8ceccbc7d4b7a35f2b67fd40189159155553270e2e6febeb69bd8a3b60d6241c8f5ddc2ef1702ccbd328501
+  checksum: 3e6dcce5cc43c5e301662db88ee26d1d188b22c177b9f104d7eefd1191236980bd953b3670fe2fac287114b26d7c5420ab48407d7ea1c3a446d6313c000009da
   languageName: node
   linkType: hard
 
@@ -4827,7 +4797,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"import-fresh@npm:^3.0.0, import-fresh@npm:^3.2.1":
+"import-fresh@npm:^3.2.1":
   version: 3.3.0
   resolution: "import-fresh@npm:3.3.0"
   dependencies:
@@ -6992,7 +6962,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "root-workspace-0b6124@workspace:."
   dependencies:
-    "@iconify/json": ^2.2.89
+    "@iconify/json": ^2.2.91
     "@popperjs/core": ^2.11.8
     "@types/lodash.random": ^3.2.7
     "@types/rdf-ext": ^2.2.1
@@ -7010,8 +6980,8 @@ __metadata:
     "@vueuse/core": ^10.2.1
     axios: ^1.4.0
     bootstrap: ^5.3.0
-    bootstrap-vue-next: ^0.9.23
-    eslint: ^8.44.0
+    bootstrap-vue-next: ^0.9.26
+    eslint: ^8.45.0
     eslint-config-prettier: ^8.8.0
     eslint-import-resolver-node: ^0.3.7
     eslint-plugin-eslint-comments: ^3.2.0
@@ -7029,9 +6999,9 @@ __metadata:
     rdf-parse: ^2.3.2
     typescript: ^5.1.6
     unplugin-auto-import: ^0.16.6
-    unplugin-icons: 0.16.3
+    unplugin-icons: 0.16.5
     unplugin-vue-components: ^0.25.1
-    vite: ^4.4.3
+    vite: ^4.4.4
     vite-plugin-node-polyfills: ^0.9.0
     vitest: ^0.33.0
     vue: ^3.3.4
@@ -7501,7 +7471,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"strip-json-comments@npm:^3.1.0, strip-json-comments@npm:^3.1.1":
+"strip-json-comments@npm:^3.1.1":
   version: 3.1.1
   resolution: "strip-json-comments@npm:3.1.1"
   checksum: 492f73e27268f9b1c122733f28ecb0e7e8d8a531a6662efbd08e22cccb3f9475e90a1b82cab06a392f6afae6d2de636f977e231296400d0ec5304ba70f166443
@@ -7883,24 +7853,27 @@ __metadata:
   languageName: node
   linkType: hard
 
-"unplugin-icons@npm:0.16.3":
-  version: 0.16.3
-  resolution: "unplugin-icons@npm:0.16.3"
+"unplugin-icons@npm:0.16.5":
+  version: 0.16.5
+  resolution: "unplugin-icons@npm:0.16.5"
   dependencies:
     "@antfu/install-pkg": ^0.1.1
-    "@antfu/utils": ^0.7.4
-    "@iconify/utils": ^2.1.6
+    "@antfu/utils": ^0.7.5
+    "@iconify/utils": ^2.1.7
     debug: ^4.3.4
     kolorist: ^1.8.0
     local-pkg: ^0.4.3
-    unplugin: ^1.3.1
+    unplugin: ^1.3.2
   peerDependencies:
     "@svgr/core": ">=7.0.0"
+    "@svgx/core": ^1.0.1
     "@vue/compiler-sfc": ^3.0.2 || ^2.7.0
     vue-template-compiler: ^2.6.12
     vue-template-es2015-compiler: ^1.9.0
   peerDependenciesMeta:
     "@svgr/core":
+      optional: true
+    "@svgx/core":
       optional: true
     "@vue/compiler-sfc":
       optional: true
@@ -7908,7 +7881,7 @@ __metadata:
       optional: true
     vue-template-es2015-compiler:
       optional: true
-  checksum: f7530c56dc2bb2eb763e14f26e7010de98b7ce33d74bd5660691c3d8e5fcfb8dfab8d57ad75206ca910132fd4528f3d3cfc4c93f830c9695ca1c44006a8ef939
+  checksum: a7aba3be40810686299467cb8111c2b3f9a1ff70bdebd0cacfca3ac8aeb72d9f029ed35ee516c5f0770115c18a49bd119e634a4a417a8b7c6b74061cd92d08e0
   languageName: node
   linkType: hard
 
@@ -8103,9 +8076,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vite@npm:^4.4.3":
-  version: 4.4.3
-  resolution: "vite@npm:4.4.3"
+"vite@npm:^4.4.4":
+  version: 4.4.4
+  resolution: "vite@npm:4.4.4"
   dependencies:
     esbuild: ^0.18.10
     fsevents: ~2.3.2
@@ -8139,7 +8112,7 @@ __metadata:
       optional: true
   bin:
     vite: bin/vite.js
-  checksum: 2f7c90de35c840ed7f33000d65006053885c0342aa7c19cee7369d7b3d92473a9bae790f910eb3e9900bdb7ca89559a772ee4782f35636ec4e6bd10717e7f5ff
+  checksum: 51c208e53680fa46f7166e49b037625ae43d507f85f1fd3da7e290263bccb77d5f8c466fe82746285927620afeeff949ac3b8e1b6a7b4fe7bfe11419729256b4
   languageName: node
   linkType: hard
 
