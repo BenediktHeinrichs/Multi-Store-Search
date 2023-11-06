@@ -35,13 +35,13 @@ export const formatAims = async (
 };
 
 export const formatCoscine = (
-  results: CoscineSearchResult[][],
+  results: CoscineSearchResult[],
 ): FormattedResults[] => {
   const returnArray: FormattedResults[] = [];
   if (results[0]) {
-    for (const result of results[0]) {
+    for (const result of results[0].data) {
       returnArray.push({
-        title: result.source.title,
+        title: result.source.title ?? result.uri,
         values: result.source,
       });
     }
@@ -57,7 +57,7 @@ export const formatMetastore = (
   for (const hit of hits) {
     const source = hit._source;
     returnArray.push({
-      title: source.metadataDocument.title,
+      title: source.metadataDocument.title ?? source.metadataRecord["id"],
       values: source.metadataRecord,
     });
   }
@@ -86,7 +86,7 @@ export const formatBasedOnMapping = async (
     case "Aims":
       return await formatAims(results as string[][]);
     case "Coscine":
-      return formatCoscine(results as CoscineSearchResult[][]);
+      return formatCoscine(results as CoscineSearchResult[]);
     case "Metastore":
       return formatMetastore(results as MetastoreSearchResult[]);
     default:

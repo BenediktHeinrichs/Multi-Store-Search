@@ -1,14 +1,25 @@
 /* Coscine */
-export interface CoscineSearchResult {
-  graphName: string;
-  type: Type;
+export interface Pagination {
+  currentPage: number;
+  totalPages: number;
+  pageSize: number;
+  totalCount: number;
+  hasPrevious: boolean;
+  hasNext: boolean;
+}
+
+export interface Daum {
+  uri: string;
+  type: string;
   source: Record<string, unknown> & { title: string };
 }
 
-export enum Type {
-  Metadata = "Metadata",
-  Project = "Project",
-  Resource = "Resource",
+export interface CoscineSearchResult {
+  pagination: Pagination;
+  data: Daum[];
+  statusCode: number;
+  isSuccess: boolean;
+  traceId: string;
 }
 
 /* MetaStore */
