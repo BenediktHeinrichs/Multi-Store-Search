@@ -15,14 +15,12 @@ build-branch:
   tags:
     - env:docker
   # use node latest for all jobs
-  image: node:18.4.0
+  image: node:20
   variables:
     # temporary fix: https://github.com/renovatebot/renovate/discussions/9481#discussioncomment-660412
     YARN_ENABLE_IMMUTABLE_INSTALLS: "false"
   stage: build
   before_script:
-    # make sure to use yarn3
-    - yarn set version berry
     # always install dependencies, will come from cache and is usually fast
     - yarn install
   script:
@@ -38,14 +36,12 @@ test:
   tags:
     - env:docker
   # use node latest for all jobs
-  image: node:18.4.0
+  image: node:20
   variables:
     # temporary fix: https://github.com/renovatebot/renovate/discussions/9481#discussioncomment-660412
     YARN_ENABLE_IMMUTABLE_INSTALLS: "false"
   stage: test
   before_script:
-    # make sure to use yarn3
-    - yarn set version berry
     # always install dependencies, will come from cache and is usually fast
     - yarn install
   script:
@@ -56,14 +52,12 @@ pages:
   tags:
     - env:docker
   # use node latest for all jobs
-  image: node:18.4.0
+  image: node:20
   variables:
     # temporary fix: https://github.com/renovatebot/renovate/discussions/9481#discussioncomment-660412
     YARN_ENABLE_IMMUTABLE_INSTALLS: "false"
   stage: pages
   before_script:
-    # make sure to use yarn2
-    - yarn set version berry
     # always install dependencies, will come from cache and is usually fast
     - yarn install
   script:
