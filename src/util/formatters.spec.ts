@@ -37,15 +37,13 @@ describe("formatResults", () => {
 describe("formatCoscine", () => {
   test("should return formatted results for CoscineSearchResult", () => {
     const results = [
-      [
-        {
-          source: { title: "Title 1" },
-          graphName: "Graph 1",
-          type: "Metadata",
-        },
-        { source: { title: "Title 2" }, graphName: "Graph 2", type: "Project" },
-      ],
-    ] as unknown as CoscineSearchResult[][];
+      {
+        data: [
+          { source: { title: "Title 1" } },
+          { source: { title: "Title 2" } },
+        ],
+      },
+    ] as unknown as CoscineSearchResult[];
     const expected = [
       {
         title: "Title 1",
@@ -60,7 +58,7 @@ describe("formatCoscine", () => {
   });
 
   test("should return an empty array if results are empty", () => {
-    const results: CoscineSearchResult[][] = [];
+    const results: CoscineSearchResult[] = [];
     const expected: FormattedResults[] = [];
     expect(formatCoscine(results)).toEqual(expected);
   });
@@ -137,10 +135,12 @@ describe("formatElse", () => {
 describe("formatBasedOnMapping", () => {
   test("should return formatted results based on mapping", async () => {
     const results = [
-      [
-        { source: { title: "Title 1" }, graphName: "Graph 1" },
-        { source: { title: "Title 2" }, graphName: "Graph 2" },
-      ],
+      {
+        data: [
+          { source: { title: "Title 1" } },
+          { source: { title: "Title 2" } },
+        ],
+      },
     ];
     const mapping = "Coscine";
     const expected = [
